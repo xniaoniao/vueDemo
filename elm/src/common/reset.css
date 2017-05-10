@@ -1,0 +1,128 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  text-decoration: none;
+}
+.clearfix {
+  display: inline-block;
+}
+.clearfix:after {
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  clear: both;
+  visibility: hidden;
+}
+@font-face {
+  font-family: 'sell-icon';
+  src: url('./fonts/sell-icon.eot?k5xf13');
+  src: url('./fonts/sell-icon.eot?k5xf13#iefix') format('embedded-opentype'),
+  url('./fonts/sell-icon.ttf?k5xf13') format('truetype'),
+  url('./fonts/sell-icon.woff?k5xf13') format('woff'),
+  url('./fonts/sell-icon.svg?k5xf13#sell-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'sell-icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+/*-webkit-font-smoothing: antialiased;*/
+/*-moz-osx-font-smoothing: grayscale;*/
+
+.icon-arrow_lift:before {
+  content: "\e900";
+}
+
+.icon-thumb_up:before {
+  content: "\e901";
+}
+.icon-thumb_down:before {
+  content: "\e902";
+}
+
+.icon-shopping_cart:before {
+  content: "\e903";
+}
+
+.icon-favorite:before {
+  content: "\e904";
+}
+
+.icon-check_circle:before {
+  content: "\e905";
+}
+
+.icon-close:before {
+  content: "\e906";
+}
+
+.icon-remove_circle_outline:before {
+  content: "\e907";
+}
+
+.icon-add_circle:before {
+  content: "\e908";
+}
+.icon-keyboard_arrow_right:before {
+  content: "\e909";
+}
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>elm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
+    <!--<link rel="stylesheet" href="src/common/reset.css">-->
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+    var Html = document.getElementsByTagName('html')[0];
+    var pageWidth = Html.getBoundingClientRect().width;
+    Html.style.fontSize = pageWidth / 16 + 'px';
+  </script>
+</html>
