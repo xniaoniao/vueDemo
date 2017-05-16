@@ -44,7 +44,6 @@
               <li  v-for="(item, index) in seller.supports" class="supports-item">
                 <span class="icon" :class="classMap[seller.supports[index].type]"></span>
                 <span class="text">{{seller.supports[index].description}}</span>
-                <!--<span>{{index}}</span>-->
               </li>
             </ul>
             <div class="title">
@@ -97,7 +96,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../common/mixin.scss";
 @import "../../common/reset.css";
-  $rem: 40;
+  $rem: 48.875;
   #header{
     .support {
       .icon {

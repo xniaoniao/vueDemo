@@ -18,7 +18,8 @@ const store = new Vuex.Store({
   state: {
     seller: {},
     linkBorderIndex: '',
-    goods: {}
+    goods: {},
+    ratings: []
   },
   mutations: {
     changeLinkBorderIndex(state, index) {
@@ -38,6 +39,13 @@ const store = new Vuex.Store({
       return Vue.axios.get('/api/goods').then(res => {
         if (res.data.error === 0) {
           state.goods = res.data.data;
+        }
+      });
+    },
+    getGoodsRatings({commit, state}) {
+      return Vue.axios.get('/api/ratings').then(res => {
+        if (res.data.error === 0) {
+          state.ratings = res.data.data;
         }
       });
     }

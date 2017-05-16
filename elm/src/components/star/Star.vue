@@ -25,7 +25,6 @@
         margin-right: 0;
       }
       .on {
-
         @include bg('star48_on');
       }
       .half {
@@ -47,13 +46,13 @@
         margin-right: 32/$rem+rem;
         background-size: 30/$rem+rem 30/$rem+rem;
       }
-      &.on {
+      .on {
         @include bg('star36_on');
       }
-      &.half {
+      .half {
         @include bg('star36_half');
       }
-      &.off {
+      .off {
         @include bg('star36_off');
       }
     }
@@ -69,13 +68,13 @@
         margin-right: 12/$rem+rem;
         background-size: 20/$rem+rem 20/$rem+rem;
       }
-      &.on {
+      .on {
         @include bg('star24_on');
       }
-      &.half {
+      .half {
         @include bg('star24_half');
       }
-      &.off {
+      .off {
         @include bg('star24_off');
       }
     }
@@ -103,9 +102,9 @@ export default {
       itemClasses() {
           let result = [];
           let score = Math.floor(this.score * 2) / 2;
-          let hasDecimal = score % 2 !== 0;
           let interger = Math.floor(score);
-          for (let i = 0; i < interger; i++) {
+          let hasDecimal = score % 2 !== 0;
+        for (let i = 0; i < interger; i++) {
               result.push(CLSON);
           }
           if (hasDecimal) {

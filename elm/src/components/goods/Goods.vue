@@ -1,53 +1,63 @@
 <template>
-  <div class="goods">
-    <div class="menu-wrapper" ref="menuWrapper">
-      <ul>
-        <li v-for="(item, index) in goods" class="menu-item" :class="{current: currentIndex == index}"
-            @click="selectMenu(index, $event)">
+  <transition name="slide">
+    <div class="goods">
+      <div class="menu-wrapper" ref="menuWrapper">
+        <ul>
+          <li v-for="(item, index) in goods" class="menu-item" :class="{current: currentIndex == index}"
+              @click="selectMenu(index, $event)">
             <span class="text">
               <span v-if="item.type>0" class="icon" :class="classMap[seller.supports[index].type]"></span>
               {{item.name}}
             </span>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="foods-wrapper" ref="foodsWrapper">
+        <ul>
+          <li v-for="item in goods" class="foods-list food-list-hook">
+            <h1 class="title">{{item.name}}</h1>
+            <ul>
+              <li v-for="food in item.foods" class="food-item" @click="selectFood(food, $event)">
+                <div class="icon">
+                  <img :src="food.icon" alt="" width="57" height="57">
+                </div>
+                <div class="content">
+                  <h2 class="name">{{food.name}}</h2>
+                  <p class="desc">{{food.description}}</p>
+                  <div class="extra">
+                    <span>月售{{food.sellCount}}</span>
+                    <span>好评率{{food.rating}}%</span>
+                  </div>
+                  <div class="price">
+                    <span class="current-price">￥{{food.price}}</span>
+                    <span v-show="food.oldPrice">{{food.ordPrice}}</span>
+                  </div>
+                  <div class="cart-control-wrapper">
+                    <VCartControl :food="food" @cartAdd="_drop($event, food)"></VCartControl>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <transition name="fly-in-right">
+        <VFood :food="selectedFood"
+               v-if="!!selectedFood"
+               ref="foodDetail"
+               @cartAdd="_drop($event, selectedFood)"
+               @close="closeDetail"></VFood>
+      </transition>
+      <VShopCart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"
+                 :select-foods="selectFoods" ref="shopCart"></VShopCart>
     </div>
-    <div class="foods-wrapper" ref="foodsWrapper">
-      <ul>
-        <li v-for="item in goods" class="foods-list food-list-hook">
-          <h1 class="title">{{item.name}}</h1>
-          <ul>
-            <li v-for="food in item.foods" class="food-item">
-              <div class="icon">
-                <img :src="food.icon" alt="" width="57" height="57">
-              </div>
-              <div class="content">
-                <h2 class="name">{{food.name}}</h2>
-                <p class="desc">{{food.description}}</p>
-                <div class="extra">
-                  <span>月售{{food.sellCount}}</span>
-                  <span>好评率{{food.rating}}%</span>
-                </div>
-                <div class="price">
-                  <span class="current-price">￥{{food.price}}</span>
-                  <span v-show="food.oldPrice">{{food.ordPrice}}</span>
-                </div>
-                <div class="cart-control-wrapper">
-                  <VCartControl :food="food" @cartAdd="_drop($event, food)"></VCartControl>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <VShopCart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"
-               :select-foods="selectFoods" ref="shopCart"></VShopCart>
-  </div>
+  </transition>
 </template>
 <script>
   import BScroll from 'better-scroll';
   import VShopCart from '../shopcart/shopcart.vue';
   import VCartControl from '../cartcontrol/CartControl.vue';
+  import VFood from '../food/Food.vue';
 
   export default {
     beforeCreate() {
@@ -100,7 +110,8 @@
     data() {
       return {
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: null
       };
     },
     methods: {
@@ -140,19 +151,30 @@
         this.$nextTick(() => {
           this.$refs.shopCart.drop(data, food.icon);
         });
+      },
+      selectFood(food, event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.selectedFood = food;
+      },
+      closeDetail() {
+        this.selectedFood = null;
       }
     },
     components: {
       VShopCart,
-      VCartControl
+      VCartControl,
+      VFood
     }
   };
 </script>
 <style lang="scss">
   @import "../../common/mixin.scss";
   @import "../../common/reset.css";
+  @import "../../common/transition";
 
-  $rem: 40;
+  $rem: 48.875;
   .goods {
     display: flex;
     position: absolute;
@@ -273,7 +295,6 @@
           }
         }
       }
-
     }
   }
 </style>

@@ -21,17 +21,17 @@
          <div class="price" :class="{'highlight': totalCount > 0}">{{totalPrice}}</div>
          <div class="desc">另需配送费{{deliveryPrice}}元</div>
        </div>
-       <div class="content-right">
+       <div class="content-right" @click.stop="pay">
          <div class="pay" :class="payClass">{{payDesc}}</div>
        </div>
      </div>
      <transition name="fold">
-       <div class="shop-list" v-show="showList" ref="showList">
+       <div class="shop-list" v-show="showList">
          <div class="title">
            <h1>购物车</h1>
            <span class="empty" @click="empty">清空</span>
          </div>
-         <div class="list-content">
+         <div class="list-content"  ref="showList">
            <ul>
              <li v-for="item in selectFoods" class="food-item">
                <span class="list-name">{{item.name}}</span>
@@ -44,10 +44,10 @@
          </div>
        </div>
      </transition>
-     <div class="mask" v-show="showList" ref="mask" @click="toggleList">
-       <transition name="show">
-       </transition>
-     </div>
+    <transition name="show">
+      <div class="mask" v-show="showList" ref="mask" @click="toggleList">
+      </div>
+    </transition>
    </div>
 </template>
 <script>
@@ -167,6 +167,15 @@
         this.selectFoods.forEach((food) => {
             food.count = 0;
         });
+      },
+      pay() {
+        if (this.totalPrice < this.minPrice) {
+          return;
+        }
+        this.selectFoods.forEach((food) => {
+          food.count = 0;
+        });
+        window.alert(`需要支付${this.totalPrice}`);
       }
     },
     components: {
@@ -175,7 +184,7 @@
   };
 </script>
 <style lang="scss">
-  $rem: 40;
+  $rem: 48.875;
   .shop-cart {
     position: fixed;
     bottom: 0;
@@ -367,29 +376,28 @@
         }
       }
     }
-    
+
     .fold-enter-active, .fold-leave-active {
-      transition: all 5s;
-      transform: translate3d(0, 100%, 0);
+      transition: all .5s ease;
     }
-     .fold-enter .fold-leave-active {
-       transform: translate3d(0, 0, 0);
-       transition: all 2s;
+     .fold-enter, .fold-leave-to {
+       transform: translate3d(0, 100%, 0);
+       transition: all .5s;
        opacity: 0
     }
+    .mask {
+      background: rgba(7, 17, 27, .6);
+      filter: blur(10px);
+      position: absolute;
+      z-index: -5;
+    }
+    .show-enter-active, .show-leave-active {
+      transition: all .5s;
+    }
+    .show-enter, .show-leave-active {
+      transition: all .5s;
+      opacity: 0;
+    }
   }
-  .mask {
-    background: rgba(7, 17, 27, .6);
-    filter: blur(10px);
-    position: absolute;
-    z-index: -5;
-    opacity: .6;
-  }
-  .show-enter-active, .show-leave-active {
-    opacity: .6;
-    transition: all .5s
-  }
-  .show-enter, .show-leave-active {
-    opacity: 0
-  }
+
 </style>

@@ -15,6 +15,11 @@
      background-image: url($url + "@3x.png");
    }
  }
+@mixin font() {
+  font-size: 20/$rem+rem;
+  line-height: 24/$rem+rem;
+  color: rgb(147, 153, 159);
+}
 
 body, html {
   font-weight: 200;
