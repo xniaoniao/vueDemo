@@ -50,7 +50,18 @@
             </ul>
           </div>
         </div>
+        <VSplit></VSplit>
+        <div class="shop-infos">
+          <h1>商家信息</h1>
+          <ul class="info-list">
+            <li v-for="(item,index) in seller.infos">
+              <span>{{item}}</span>
+            </li>
+          </ul>
+        </div>
       </div>
+      <VShopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"
+                 ></VShopcart>
     </div>
   </transition>
 </template>
@@ -58,7 +69,7 @@
   @import "../../common/mixin.scss";
   @import "../../common/reset.css";
 
-  $rem: 40;
+  $rem: 48.875;
 
   .seller-wrapper {
     overflow: hidden;
@@ -73,141 +84,163 @@
       font-size: 28/$rem+rem;
       margin-bottom: 16/$rem+rem;
     }
-  }
-
-  .seller-content {
-    margin: 36/$rem+rem;
-    font-size: 0;
-    .sell-info {
-      padding-bottom: 36/$rem+rem;
-      border-bottom: 1px solid rgba(7, 17, 27, .1);
-      .left {
-        .star {
-          display: inline-block;
-          margin-right: -20/$rem+rem;
-          span {
-            margin-right: 4/$rem+rem;
-            line-height: 36/$rem+rem;
-          }
-        }
-        span.score {
-          margin-right: 24/$rem+rem;
-          color: rgb(77, 85, 93);
-          line-height: 36/$rem+rem;
-          font-size: 20/$rem+rem;
-          vertical-align: top;
-        }
-      }
-    }
-    .detail-info {
-      padding-top: 36/$rem+rem;
-      ul {
-        display: flex;
-        li {
-          flex: 1;
-          border-right: 1px solid rgba(7, 17, 27, .1);
-          text-align: center;
-          &:last-child {
-            border: none;
-          }
-          h3 {
-            font-size: 20/$rem+rem;
-            line-height: 20/$rem+rem;
-            color: rgb(147, 153, 159);
-            margin-bottom: 8/$rem+rem;
-          }
-          span {
-            font-size: 48/$rem+rem;
-            color: rgb(7, 17, 27);
-            line-height: 48/$rem+rem;
-            font-weight: 200;
-          }
-        }
-      }
-    }
-  }
-
-  .bulletin {
-    margin: 36/$rem+rem 36/$rem+rem 0;
-    padding-bottom: 32/$rem+rem;
-    border-bottom: 1px solid rgba(7, 17, 27, .1);
-    h1 {
-      margin-bottom: 16/$rem+rem;
-    }
-    p {
-      padding: 0 24/$rem+rem;
-      font-size: 24/$rem+rem;
-      color: rgb(220, 20, 20);
-      line-height: 48/$rem+rem;
-      font-weight: 200;
-    }
-  }
-
-  ul.supports {
-    margin: 0 36/$rem+rem;
-    li {
-      border-bottom: 1px solid rgba(7, 17, 27, .1);
-      padding: 32/$rem+rem 24/$rem+rem;
+    .seller-content {
+      margin: 36/$rem+rem;
       font-size: 0;
-      .icon {
-        display: inline-block;
-        height: 32/$rem + rem;
-        width: 32/$rem + rem;
-        margin-right: 12/$rem + rem;
-        background-size: 32/$rem + rem 32/$rem + rem;
-        vertical-align: top;
-        &.decrease {
-          @include bg("decrease_4");
-        }
-        &.discount {
-          @include bg("discount_4");
-        }
-        &.guarantee {
-          @include bg("guarantee_4");
-        }
-        &.invoice {
-          @include bg("invoice_4");
-        }
-        &.special {
-          @include bg("special_4");
+      .sell-info {
+        padding-bottom: 36/$rem+rem;
+        border-bottom: 1px solid rgba(7, 17, 27, .1);
+        .left {
+          .star {
+            display: inline-block;
+            margin-right: -20/$rem+rem;
+            span {
+              margin-right: 4/$rem+rem;
+              line-height: 36/$rem+rem;
+            }
+          }
+          span.score {
+            margin-right: 24/$rem+rem;
+            color: rgb(77, 85, 93);
+            line-height: 36/$rem+rem;
+            font-size: 20/$rem+rem;
+            vertical-align: top;
+          }
         }
       }
-      .text {
-        font-size: 24/$rem+rem;
-        font-weight: 200;
-        color: rgb(7, 17, 27);
-        line-height: 32/$rem+rem;
-      }
-    }
-  }
-
-  .shop-pic {
-    margin: 36/$rem+rem;
-   padding-bottom: 1rem;
-    position: relative;
-    overflow: hidden;
-    .shop-list{
-      ul {
-        display: flex;
-        position: absolute;
-        left: 0;
-        width: 100%;
-        li {
-          margin-right: 12/$rem+rem;
-          flex: 1;
-          img {
-            width: 240/$rem+rem;
-            height: 180/$rem+rem;
+      .detail-info {
+        padding-top: 36/$rem+rem;
+        ul {
+          display: flex;
+          li {
+            flex: 1;
+            border-right: 1px solid rgba(7, 17, 27, .1);
+            text-align: center;
+            &:last-child {
+              border: none;
+            }
+            h3 {
+              font-size: 20/$rem+rem;
+              line-height: 20/$rem+rem;
+              color: rgb(147, 153, 159);
+              margin-bottom: 8/$rem+rem;
+            }
+            span {
+              font-size: 48/$rem+rem;
+              color: rgb(7, 17, 27);
+              line-height: 48/$rem+rem;
+              font-weight: 200;
+            }
           }
         }
       }
     }
 
+    .bulletin {
+      margin: 36/$rem+rem 36/$rem+rem 0;
+      padding-bottom: 32/$rem+rem;
+      border-bottom: 1px solid rgba(7, 17, 27, .1);
+      h1 {
+        margin-bottom: 16/$rem+rem;
+      }
+      p {
+        padding: 0 24/$rem+rem;
+        font-size: 24/$rem+rem;
+        color: rgb(220, 20, 20);
+        line-height: 48/$rem+rem;
+        font-weight: 200;
+      }
+    }
+
+    ul.supports {
+      margin: 0 36/$rem+rem;
+      li {
+        border-bottom: 1px solid rgba(7, 17, 27, .1);
+        padding: 32/$rem+rem 24/$rem+rem;
+        font-size: 0;
+        .icon {
+          display: inline-block;
+          height: 32/$rem + rem;
+          width: 32/$rem + rem;
+          margin-right: 12/$rem + rem;
+          background-size: 32/$rem + rem 32/$rem + rem;
+          vertical-align: top;
+          &.decrease {
+            @include bg("decrease_4");
+          }
+          &.discount {
+            @include bg("discount_4");
+          }
+          &.guarantee {
+            @include bg("guarantee_4");
+          }
+          &.invoice {
+            @include bg("invoice_4");
+          }
+          &.special {
+            @include bg("special_4");
+          }
+        }
+        .text {
+          font-size: 24/$rem+rem;
+          font-weight: 200;
+          color: rgb(7, 17, 27);
+          line-height: 32/$rem+rem;
+        }
+      }
+    }
+
+    .shop-pic {
+      margin: 36/$rem+rem;
+      padding-bottom: 4.5rem;
+      overflow: hidden;
+      .shop-list {
+        height: 100%;
+        position: relative;
+        ul {
+          display: flex;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          li {
+            margin-right: 12/$rem+rem;
+            flex: 1;
+            img {
+              width: 240/$rem+rem;
+              height: 180/$rem+rem;
+            }
+          }
+        }
+      }
+
+    }
+
+    .shop-infos {
+      margin: 36/$rem+rem 36/$rem+rem 0;
+      h1 {
+        border-bottom: 1px solid rgba(7, 17, 27, .1);
+        padding-bottom: 24/$rem+rem;
+      }
+      ul {
+        li {
+          padding: 36/$rem+rem 24/$rem+rem;
+          border-bottom: 1px solid rgba(7, 17, 27, .1);
+          span {
+            color: rgb(7,17,27);
+            font-size: 24/$rem+rem;
+            line-height:32/$rem+rem;
+            font-weight:200;
+          }
+        }
+      }
+    }
   }
 </style>
 <script>
   import VStar from '../../components/star/Star.vue';
   import VSplit from '../../components/split/Split.vue';
+  import VShopcart from '../../components/shopcart/shopcart.vue';
+
   import BScroll from 'better-scroll';
   export default {
     mounted() {
@@ -265,7 +298,8 @@
     },
     components: {
       VStar,
-      VSplit
+      VSplit,
+      VShopcart
     }
   };
 </script>

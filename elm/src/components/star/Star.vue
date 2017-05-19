@@ -6,7 +6,7 @@
 <style lang="scss">
   @import "../../common/mixin.scss";
 
-  $rem: 40;
+  $rem: 48.875;
   .star {
     font-size: 0;
     .star-item {
