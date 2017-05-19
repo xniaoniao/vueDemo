@@ -1,10 +1,11 @@
 <template>
   <div class="star" :class="starType">
-      <span v-for="itemClass in itemClasses" :class="itemClass" class="star-item"></span>
+    <span v-for="itemClass in itemClasses" :class="itemClass" class="star-item"></span>
   </div>
 </template>
 <style lang="scss">
   @import "../../common/mixin.scss";
+
   $rem: 40;
   .star {
     font-size: 0;
@@ -86,35 +87,35 @@
   const CLSOFF = 'off';
   const LENGTH = 5;
 
-export default {
-   props: {
-       size: {
-           type: Number
-       },
+  export default {
+    props: {
+      size: {
+        type: Number
+      },
       score: {
-           type: Number
+        type: Number
       }
-   },
-  computed: {
-       starType() {
-           return 'star_' + this.size;
-       },
+    },
+    computed: {
+      starType() {
+        return 'star_' + this.size;
+      },
       itemClasses() {
-          let result = [];
-          let score = Math.floor(this.score * 2) / 2;
-          let interger = Math.floor(score);
-          let hasDecimal = score % 2 !== 0;
-        for (let i = 0; i < interger; i++) {
-              result.push(CLSON);
-          }
-          if (hasDecimal) {
-              result.push(CLSHALF);
-          }
-          while (result.length < LENGTH) {
-              result.push(CLSOFF);
-          }
-          return result;
+        let result = [];
+        let score = Math.floor(this.score * 2) / 2;
+        let integer = Math.floor(score);
+        let hasDecimal = this.score !== ~~this.score;
+        for (let i = 0; i < integer; i++) {
+          result.push(CLSON);
+        }
+        if (hasDecimal) {
+          result.push(CLSHALF);
+        }
+        while (result.length < LENGTH) {
+          result.push(CLSOFF);
+        }
+        return result;
       }
-  }
-};
+    }
+  };
 </script>

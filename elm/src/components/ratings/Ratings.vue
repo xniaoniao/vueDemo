@@ -10,8 +10,8 @@
           </div>
           <div class="right-scores">
             <div class="server">
-              <span class="text">服务态度</span>
-              <VStar :size="36" :score="seller.score" class="star"></VStar>
+              <span class="text">商品评价</span>
+              <VStar :size="36" :score="seller.foodScore" class="star"></VStar>
               <span class="scores">{{seller.score}}</span>
             </div>
             <div class="server">
@@ -38,7 +38,6 @@
                 <div class="rating-info">
                   <span class="user">{{item.username}}</span>
                   <VStar :size="24" :score="item.score"></VStar>
-                  <span style="font-size: 20px">{{item.score}}</span>
                   <span class="deliveryTime" v-show="item.deliveryTime && item.deliveryTime != ''">{{item.deliveryTime}}
                     分钟送达</span>
                   <span class="time">{{item.rateTime | formateDate}}</span>
@@ -261,7 +260,7 @@
               .deliveryTime {
                 position: absolute;
                 top: 34/$rem+rem;
-                left: 250/$rem+rem;
+                left: 200/$rem+rem;
                 color: rgb(147, 153, 157);
                 font-size: 20/$rem+rem;
               }
